@@ -5,13 +5,15 @@ import com.springboot.dto.DiaryResponse;
 import com.springboot.mapper.DiaryMapper;
 import com.springboot.model.Couple;
 import com.springboot.model.Diary;
+import com.springboot.model.Emotion;
 import com.springboot.model.User;
 import com.springboot.repository.CoupleRepository;
 import com.springboot.repository.DiaryRepository;
 import com.springboot.repository.UserRepository;
-import com.springboot.security.utils.SecurityConstants;
+import com.springboot.security.utils.CurrentUserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -25,13 +27,15 @@ public class DiaryServiceImpl implements DiaryService {
     private final CoupleRepository coupleRepository;
     private final EmotionAnalysisService emotionAnalysisService;
     private final NotificationService notificationService;
+    private final CurrentUserFacade currentUserFacade;
 
     @Override
+    @Transactional
     public DiaryResponse createDiary(DiaryRequest request) {
-        String username = SecurityConstants.getAuthenticatedUsername();
+        String username = currentUserFacade.getCurrentUsername();
         User author = userRepository.findByUsername(username);
 
-        String emotion = emotionAnalysisService.analyzeEmotion(request.getContent());
+        Emotion emotion = emotionAnalysisService.analyzeEmotion(request.getContent());
         Diary diary = Diary.builder()
                 .author(author)
                 .content(request.getContent())

@@ -1,5 +1,7 @@
 package com.springboot.diary;
 
+import com.springboot.model.Emotion;
+
 public interface EmotionAnalysisService {
-    String analyzeEmotion(String text);
+    Emotion analyzeEmotion(String text);
 }

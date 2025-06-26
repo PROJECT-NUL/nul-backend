@@ -1,5 +1,6 @@
 package com.springboot.dto;
 
+import com.springboot.model.Emotion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,5 +13,5 @@ import lombok.Setter;
 public class DiaryResponse {
     private Long id;
     private String content;
-    private String emotion;
+    private Emotion emotion;
 }

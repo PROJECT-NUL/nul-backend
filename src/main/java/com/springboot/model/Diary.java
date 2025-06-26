@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
+import com.springboot.model.Emotion;
+
+/** Diary entity storing user's diary entries with associated emotion. */
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,7 +28,8 @@ public class Diary {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    private String emotion;
+    @Enumerated(EnumType.STRING)
+    private Emotion emotion;
 
     private LocalDateTime createdAt;
 }
