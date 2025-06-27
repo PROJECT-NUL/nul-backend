@@ -31,6 +31,13 @@ Run service in command line. Navigate to *target* directory.
 
 ``` java -jar spring-boot-boilerplate.jar ```
 
+## Monitoring
+
+The project exposes Prometheus metrics at `/actuator/prometheus`. You can run
+`docker compose up -d` to start Prometheus and Grafana services defined in the
+compose files. Grafana will be available on port `3000` and Prometheus on port
+`9090`.
+
 ## Postman Collection
 
 - [You can access the Postman collection here and you can try it after you get the project up and running.](https://www.postman.com/postmanfaruk/workspace/faruk-genc-projects/collection/11439300-3d0317df-f217-40ff-a2a6-4eaaf66e1c55?action=share&creator=11439300)
