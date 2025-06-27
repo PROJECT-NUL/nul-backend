@@ -1,0 +1,24 @@
+name: Feature Request
+description: Suggest an idea for this project
+labels: enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing an idea to improve the project.
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: A clear and concise description of your idea.
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Provide more context and possible implementation details.
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
