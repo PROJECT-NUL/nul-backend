@@ -26,6 +26,10 @@ public class ExceptionMessageAccessor {
 
                 Locale resolved = Objects.nonNull(locale) ? locale : LocaleContextHolder.getLocale();
 
+                if (Objects.isNull(resolved)) {
+                        resolved = ProjectConstants.DEFAULT_LOCALE;
+                }
+
                 return messageSource.getMessage(key, parameter, resolved);
         }
 

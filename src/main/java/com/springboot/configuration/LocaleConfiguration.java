@@ -12,7 +12,7 @@ public class LocaleConfiguration {
     @Bean
     public LocaleResolver localeResolver() {
         AcceptHeaderLocaleResolver resolver = new AcceptHeaderLocaleResolver();
-        resolver.setDefaultLocale(ProjectConstants.TURKISH_LOCALE);
+        resolver.setDefaultLocale(ProjectConstants.DEFAULT_LOCALE);
         return resolver;
     }
 }
