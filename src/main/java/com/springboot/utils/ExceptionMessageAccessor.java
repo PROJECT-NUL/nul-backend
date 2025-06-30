@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 import java.util.Objects;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 /**
  * Created on Ağustos, 2020
@@ -21,13 +22,11 @@ public class ExceptionMessageAccessor {
 		this.messageSource = messageSource;
 	}
 
-	public String getMessage(Locale locale, String key, Object... parameter) {
+        public String getMessage(Locale locale, String key, Object... parameter) {
 
-		if (Objects.isNull(locale)) {
-			return messageSource.getMessage(key, parameter, ProjectConstants.TURKISH_LOCALE);
-		}
+                Locale resolved = Objects.nonNull(locale) ? locale : LocaleContextHolder.getLocale();
 
-		return messageSource.getMessage(key, parameter, locale);
-	}
+                return messageSource.getMessage(key, parameter, resolved);
+        }
 
 }
