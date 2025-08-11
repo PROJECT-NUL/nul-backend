@@ -7,7 +7,6 @@ import com.springboot.repository.UserRepository;
 import com.springboot.security.dto.AuthenticatedUserDto;
 import com.springboot.security.dto.RegistrationRequest;
 import com.springboot.security.dto.RegistrationResponse;
-import com.springboot.security.mapper.UserMapper;
 import com.springboot.service.UserValidationService;
 import com.springboot.utils.GeneralMessageAccessor;
 import lombok.RequiredArgsConstructor;
@@ -46,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
 		userValidationService.validateUser(registrationRequest);
 
-		final User user = UserMapper.INSTANCE.convertToUser(registrationRequest);
+                final User user = registrationRequest.toUser();
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setUserRole(UserRole.USER);
 
@@ -65,6 +64,6 @@ public class UserServiceImpl implements UserService {
 
 		final User user = findByUsername(username);
 
-		return UserMapper.INSTANCE.convertToAuthenticatedUserDto(user);
-	}
+                return user.toAuthenticatedUserDto();
+        }
 }
