@@ -1,5 +1,6 @@
 package com.springboot.security.dto;
 
+import com.springboot.model.User;
 import com.springboot.model.UserRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,17 @@ public class AuthenticatedUserDto {
 
 	private String username;
 
-	private String password;
+        private String password;
 
-	private UserRole userRole;
+        private UserRole userRole;
+
+        public User toUser() {
+                return User.builder()
+                        .name(name)
+                        .username(username)
+                        .password(password)
+                        .userRole(userRole)
+                        .build();
+        }
 
 }

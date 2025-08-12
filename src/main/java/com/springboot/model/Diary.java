@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
+import com.springboot.dto.DiaryResponse;
 import com.springboot.model.Emotion;
 
 /** Diary entity storing user's diary entries with associated emotion. */
@@ -32,4 +33,8 @@ public class Diary {
     private Emotion emotion;
 
     private LocalDateTime createdAt;
+
+    public DiaryResponse toDiaryResponse() {
+        return new DiaryResponse(id, content, emotion);
+    }
 }

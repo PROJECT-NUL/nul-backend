@@ -2,7 +2,6 @@ package com.springboot.diary;
 
 import com.springboot.dto.DiaryRequest;
 import com.springboot.dto.DiaryResponse;
-import com.springboot.mapper.DiaryMapper;
 import com.springboot.model.Couple;
 import com.springboot.model.Diary;
 import com.springboot.model.Emotion;
@@ -15,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -36,12 +34,7 @@ public class DiaryServiceImpl implements DiaryService {
         User author = userRepository.findByUsername(username);
 
         Emotion emotion = emotionAnalysisService.analyzeEmotion(request.getContent());
-        Diary diary = Diary.builder()
-                .author(author)
-                .content(request.getContent())
-                .emotion(emotion)
-                .createdAt(LocalDateTime.now())
-                .build();
+        Diary diary = request.toDiary(author, emotion);
         diaryRepository.save(diary);
 
         Optional<Couple> coupleOpt = coupleRepository.findByPartner1OrPartner2(author, author);
@@ -52,6 +45,6 @@ public class DiaryServiceImpl implements DiaryService {
             }
         });
 
-        return DiaryMapper.INSTANCE.convertToDiaryResponse(diary);
+        return diary.toDiaryResponse();
     }
 }
