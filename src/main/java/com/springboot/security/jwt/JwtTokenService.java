@@ -2,7 +2,6 @@ package com.springboot.security.jwt;
 
 import com.springboot.model.User;
 import com.springboot.security.dto.AuthenticatedUserDto;
-import com.springboot.security.mapper.UserMapper;
 import com.springboot.security.service.UserService;
 import com.springboot.security.dto.LoginRequest;
 import com.springboot.security.dto.LoginResponse;
@@ -37,9 +36,9 @@ public class JwtTokenService {
 
 		authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
-		final AuthenticatedUserDto authenticatedUserDto = userService.findAuthenticatedUserByUsername(username);
+                final AuthenticatedUserDto authenticatedUserDto = userService.findAuthenticatedUserByUsername(username);
 
-		final User user = UserMapper.INSTANCE.convertToUser(authenticatedUserDto);
+                final User user = authenticatedUserDto.toUser();
 		final String token = jwtTokenManager.generateToken(user);
 
 		log.info("{} has successfully logged in!", user.getUsername());

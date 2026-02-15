@@ -1,5 +1,6 @@
 package com.springboot.security.dto;
 
+import com.springboot.model.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -29,6 +30,14 @@ public class RegistrationRequest {
 	private String username;
 
 	@NotEmpty(message = "{registration_password_not_empty}")
-	private String password;
+        private String password;
 
+        public User toUser() {
+                return User.builder()
+                        .name(name)
+                        .email(email)
+                        .username(username)
+                        .password(password)
+                        .build();
+        }
 }

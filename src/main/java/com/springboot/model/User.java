@@ -2,6 +2,7 @@ package com.springboot.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.springboot.security.dto.AuthenticatedUserDto;
 
 
 /**
@@ -31,7 +32,15 @@ public class User {
 
 	private String email;
 
-	@Enumerated(EnumType.STRING)
-	private UserRole userRole;
+        @Enumerated(EnumType.STRING)
+        private UserRole userRole;
 
+        public AuthenticatedUserDto toAuthenticatedUserDto() {
+                AuthenticatedUserDto dto = new AuthenticatedUserDto();
+                dto.setName(name);
+                dto.setUsername(username);
+                dto.setPassword(password);
+                dto.setUserRole(userRole);
+                return dto;
+        }
 }
