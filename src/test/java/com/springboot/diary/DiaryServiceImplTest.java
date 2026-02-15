@@ -82,4 +82,5 @@ class DiaryServiceImplTest {
         verify(diaryRepository).save(any(Diary.class));
         verify(notificationService).notifyPartner(eq(partner), any(Diary.class));
     }
+    //test
 }
