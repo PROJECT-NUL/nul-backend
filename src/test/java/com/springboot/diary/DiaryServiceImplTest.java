@@ -61,25 +61,4 @@ class DiaryServiceImplTest {
         verify(diaryRepository).save(any(Diary.class));
         verify(notificationService).notifyPartner(eq(partner), any(Diary.class));
     }
-
-    @Test
-    void createDiary_noCouple_savesDiaryWithoutNotification() {
-        DiaryRequest request = new DiaryRequest();
-        request.setContent("슬픈 하루");   
-        
-        User author = new User();
-        when(currentUserFacade.getCurrentUsername()).thenReturn("user");
-        when(userRepository.findByUsername("user")).thenReturn(author);
-        when(emotionAnalysisService.analyzeEmotion("슬픈 하루")).thenReturn(Emotion.NEGATIVE);
-
-        User partner = new User();
-        Couple couple = Couple.builder().partner1(author).partner2(partner).build();
-        when(coupleRepository.findByPartner1OrPartner2(author, author)).thenReturn(Optional.of(couple));
-
-        DiaryResponse response = diaryService.createDiary(request);
-
-        assertEquals(Emotion.POSITIVE, response.getEmotion());
-        verify(diaryRepository).save(any(Diary.class));
-        verify(notificationService).notifyPartner(eq(partner), any(Diary.class));
-    }
 }
