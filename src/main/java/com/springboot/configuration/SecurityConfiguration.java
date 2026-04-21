@@ -46,8 +46,11 @@ public class SecurityConfiguration {
 																	      "/v3/api-docs/**",
 																          "/swagger-ui/**",
 																	      "/swagger-ui.html",
-																	      "/actuator/**")
+																	      "/actuator/health",
+																	      "/actuator/info")
 													   .permitAll()
+													   .requestMatchers("/actuator/**")
+													   .authenticated()
 													   .anyRequest()
 													   .authenticated())
 				.sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

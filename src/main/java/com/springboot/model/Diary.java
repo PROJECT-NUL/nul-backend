@@ -2,10 +2,9 @@ package com.springboot.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
 
 import com.springboot.dto.DiaryResponse;
-import com.springboot.model.Emotion;
 
 /** Diary entity storing user's diary entries with associated emotion. */
 
@@ -13,10 +12,10 @@ import com.springboot.model.Emotion;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 @Table(name = "DIARY")
-public class Diary {
+public class Diary extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +30,6 @@ public class Diary {
 
     @Enumerated(EnumType.STRING)
     private Emotion emotion;
-
-    private LocalDateTime createdAt;
 
     public DiaryResponse toDiaryResponse() {
         return new DiaryResponse(id, content, emotion);

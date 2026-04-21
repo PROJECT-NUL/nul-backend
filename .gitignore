@@ -144,3 +144,13 @@ replay_pid*
 target/
 build/
 .gradle/
+
+# Claude Code local settings
+.claude/
+
+# IntelliJ IDEA project root files (not covered by patterns above)
+.idea/.gitignore
+.idea/.name
+.idea/compiler.xml
+.idea/misc.xml
+.idea/vcs.xml
